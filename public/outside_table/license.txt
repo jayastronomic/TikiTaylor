@@ -1,0 +1,11 @@
+Model Information:
+* title:	Outside Table
+* source:	https://sketchfab.com/3d-models/outside-table-ba3a53a73b3f409ea1f2898077e517cf
+* author:	RobErtArt (https://sketchfab.com/RobErtArt)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Outside Table" (https://sketchfab.com/3d-models/outside-table-ba3a53a73b3f409ea1f2898077e517cf) by RobErtArt (https://sketchfab.com/RobErtArt) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

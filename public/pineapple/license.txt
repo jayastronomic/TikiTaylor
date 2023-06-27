@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pineapple Scan
+* source:	https://sketchfab.com/3d-models/pineapple-scan-1c77bd376c0940cab3ec72b037a6fc46
+* author:	Franco Pizzani (https://sketchfab.com/LittleNinja)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pineapple Scan" (https://sketchfab.com/3d-models/pineapple-scan-1c77bd376c0940cab3ec72b037a6fc46) by Franco Pizzani (https://sketchfab.com/LittleNinja) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

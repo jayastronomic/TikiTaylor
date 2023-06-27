@@ -1,0 +1,11 @@
+Model Information:
+* title:	Realistic Palm Tree Model vol.1
+* source:	https://sketchfab.com/3d-models/realistic-palm-tree-model-vol1-24bc514ac5e04e56a97fcb9b555aa67d
+* author:	aliyeredon (https://sketchfab.com/aliyeredon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Realistic Palm Tree Model vol.1" (https://sketchfab.com/3d-models/realistic-palm-tree-model-vol1-24bc514ac5e04e56a97fcb9b555aa67d) by aliyeredon (https://sketchfab.com/aliyeredon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coconut Drink
+* source:	https://sketchfab.com/3d-models/coconut-drink-05a7d1d72e5e4a5ebfe7705b8166d362
+* author:	Ankita Saha (https://sketchfab.com/ankitasaha)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coconut Drink" (https://sketchfab.com/3d-models/coconut-drink-05a7d1d72e5e4a5ebfe7705b8166d362) by Ankita Saha (https://sketchfab.com/ankitasaha) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
