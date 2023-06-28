@@ -14,7 +14,6 @@ export default function PalmTree(props) {
   const { nodes, materials } = useGLTF("/palm_tree-transformed.glb");
   return (
     <group
-      position={[-1, -1.2, 0.0]}
       scale={0.24}
       rotation={[Math.PI / 2, 0, 0]}
       {...props}

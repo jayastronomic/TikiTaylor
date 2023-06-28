@@ -14,7 +14,7 @@ export default function Table(props) {
   const { nodes, materials } = useGLTF("/outside_table-transformed.glb");
   return (
     <group
-      position={[1.5, 2.4, 0.2]}
+      position={[Math.PI / 2, 2.4, 0.2]}
       rotation={[Math.PI / 2, 1, 0]}
       scale={0.4}
       {...props}

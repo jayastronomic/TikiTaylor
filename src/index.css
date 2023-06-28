@@ -10,3 +10,29 @@ body,
   height: 100%;
   width: 100%;
 }
+
+@font-face {
+  font-family: "luau";
+  src: url("./fonts/Luau.ttf");
+}
+
+@font-face {
+  font-family: "lemonmilk";
+  src: url("./fonts/Lemon.otf");
+}
+
+@font-face {
+  font-family: "tiki";
+  src: url("./fonts/Tiki.ttf");
+}
+.tiki {
+  font-family: "tiki";
+}
+
+.lemonmilk {
+  font-family: "lemonmilk";
+}
+
+.luau {
+  font-family: "luau";
+}

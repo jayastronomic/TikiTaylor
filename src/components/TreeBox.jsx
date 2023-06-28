@@ -1,21 +1,12 @@
 import React from "react";
-import { Model } from "./Scene";
+import PalmTree from "./PalmTree";
 
 const TreeBox = () => {
   return (
-    <group position={[0, 0, -2]}>
-      <group position={[-2.6, 1, -3]} rotation={[0, -0.3, -1]}>
-        <Model />
-      </group>
-      <group position={[-2.6, -1, -3]} rotation={[0, -0.3, -1]}>
-        <Model />
-      </group>
-      <group position={[-2.6, -3, -3]} rotation={[0, -0.3, -1]}>
-        <Model />
-      </group>
-      <group position={[-2.6, -5, -3]} rotation={[0, -0.3, -1.3]}>
-        <Model />
-      </group>
+    <group>
+      <PalmTree position={[-1, -1.2, 0.0]} />
+      <PalmTree position={[1.4, -0.4, 0.0]} />
+      <PalmTree position={[-0.6, 2.5, 0.0]} />
     </group>
   );
 };
