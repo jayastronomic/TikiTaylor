@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/malibu-sunset-5960dfd9ef1140539e0041f440
 Title: Malibu sunset
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Malibu(props) {

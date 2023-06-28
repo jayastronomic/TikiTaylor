@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/realistic-palm-tree-model-vol1-24bc514ac
 Title: Realistic Palm Tree Model vol.1
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function PalmTree(props) {

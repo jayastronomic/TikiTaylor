@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.1.3 sketch.gltf --transform
 
 import { Center } from "@react-three/drei";
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 function Model(props) {

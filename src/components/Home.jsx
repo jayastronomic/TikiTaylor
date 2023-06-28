@@ -1,8 +1,7 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { Html, Loader, OrbitControls, Sky } from "@react-three/drei";
-
-import GrassWall from "./Sketch";
+import { Loader } from "@react-three/drei";
+import GrassWall from "./GrassWall";
 import Text from "./Text";
 import FlowerScape from "./FlowerScape";
 import Ukulele from "./Ukulele";
@@ -10,7 +9,6 @@ import BeachChair from "./Beach_chair";
 import PineApple from "./Pineapple";
 import Table from "./Table";
 import Malibu from "./Malibu";
-import PalmTree from "./PalmTree";
 import TikiWall from "./TikiWall";
 import { Sparkles } from "@react-three/drei";
 import Interface from "./Interface";

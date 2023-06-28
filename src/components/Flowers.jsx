@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/flowers-b56e199f962f49b29686c1a891fe47bd
 Title: Flowers
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Flowers(props) {

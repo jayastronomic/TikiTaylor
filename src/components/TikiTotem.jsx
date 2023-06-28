@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/tiki-totem-b119531299e14d6db28090424a004
 Title: Tiki Totem
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function TikiTotem(props) {

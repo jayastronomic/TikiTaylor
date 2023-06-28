@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/pineapple-scan-1c77bd376c0940cab3ec72b03
 Title: Pineapple Scan
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function PineApple(props) {

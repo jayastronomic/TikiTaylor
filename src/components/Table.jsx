@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/outside-table-ba3a53a73b3f409ea1f2898077
 Title: Outside Table
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Table(props) {

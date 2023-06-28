@@ -2,14 +2,82 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
+import { useMutation } from "react-query";
+import Modal from "../components/Modal";
 
 const Reservation = () => {
   const navigate = useNavigate();
   const [plusOne, setPlusOne] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [guest, setGuest] = useState({
+    firstName: "",
+    lastName: "",
+    plusOne: {
+      firstName: "",
+      lastName: "",
+    },
+  });
+
+  const addGuest = async (data) => {
+    const guest = { ...data };
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(guest),
+    };
+    const user = await fetch("http://localhost:3001/guests", payload);
+    return await user.json();
+  };
+
+  const mutation = useMutation(addGuest, {
+    onSuccess: (data) => {
+      setVisible(true);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    mutation.mutate(guest);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "plusOneFirstName") {
+      setGuest({
+        ...guest,
+        plusOne: {
+          ...guest.plusOne,
+          firstName: value,
+        },
+      });
+      return;
+    }
+    if (name === "plusOneLastName") {
+      setGuest({
+        ...guest,
+        plusOne: {
+          ...guest.plusOne,
+          lastName: value,
+        },
+      });
+      return;
+    }
+    setGuest({ ...guest, [name]: value });
+  };
+
+  const validFields = () => {
+    return (
+      (guest.firstName.length >= 1 && guest.lastName.length >= 1 && !plusOne) ||
+      (guest.firstName.length >= 1 &&
+        guest.lastName.length >= 1 &&
+        guest.plusOne.firstName.length >= 1 &&
+        guest.plusOne.lastName.length >= 1 &&
+        plusOne)
+    );
+  };
+
   return (
     <div className="relative flex flex-col h-screen w-screen items-center bg-gray-100">
       <div className="absolute top-4 left-4">
@@ -44,10 +112,16 @@ const Reservation = () => {
             <input
               className="border p-1 rounded focus:outline-none focus:ring-2"
               placeholder="First"
+              value={guest.firstName}
+              name="firstName"
+              onChange={handleChange}
             />
             <input
               className="border p-1 rounded focus:outline-none focus:ring-2"
               placeholder="Last"
+              value={guest.lastName}
+              name="lastName"
+              onChange={handleChange}
             />
           </div>
           <div className="flex text-sm space-x-1 self-start">
@@ -70,25 +144,43 @@ const Reservation = () => {
               <input
                 className="border p-1 rounded focus:outline-none focus:ring-2"
                 placeholder="First"
+                value={guest.plusOne.firstName}
+                onChange={handleChange}
+                name={"plusOneFirstName"}
               />
               <input
                 className="border p-1 rounded focus:outline-none focus:ring-2"
                 placeholder="Last"
+                value={guest.plusOne.lastName}
+                onChange={handleChange}
+                name={"plusOneLastName"}
               />
             </motion.div>
           )}
+
           <motion.button
-            whileHover={{
-              scale: 1.05,
-              transition: { duration: 0.2 },
-            }}
+            disabled={validFields() ? false : true}
+            whileHover={
+              validFields()
+                ? {
+                    scale: 1.05,
+                    transition: { duration: 0.2 },
+                  }
+                : {}
+            }
             whileTap={{ scale: 1 }}
-            className="text-white bg-blue-400 rounded p-2 self-start w-full"
+            className={
+              validFields()
+                ? "text-white bg-blue-400 rounded p-2 self-start w-full transition duration-200"
+                : "text-white bg-gray-300 rounded p-2 self-start w-full cursor-not-allowed transition duration-200"
+            }
+            type="submit"
           >
             Submit
           </motion.button>
         </form>
       </motion.div>
+      {visible && <Modal />}
     </div>
   );
 };

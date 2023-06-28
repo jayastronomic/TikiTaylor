@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/ukulele-e15fa5ac39a04695a4caa1bcf0a268ef
 Title: Ukulele
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Ukulele(props) {

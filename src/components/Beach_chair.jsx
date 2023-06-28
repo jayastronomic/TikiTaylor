@@ -7,7 +7,7 @@ Source: https://sketchfab.com/3d-models/beach-chair-2873b42fd98d4e879bfd3d29cf72
 Title: beach chair
 */
 
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function BeachChair(props) {
