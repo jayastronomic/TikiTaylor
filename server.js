@@ -22,7 +22,7 @@ const port = process.env.PORT || 5001;
 server.use(middlewares);
 server.use(
   jsonServer.rewriter({
-    "/api/": "/$1",
+    "/api/*": "/$1",
   })
 );
 
