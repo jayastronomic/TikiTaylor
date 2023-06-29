@@ -17,8 +17,8 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />}></Route>
         <Route path="/reservation" element={<Reservation />}></Route>
-        <Route path="/admin/login" element={<AdminLogin />}></Route>
-        <Route path="/admin/guests" element={<Guests />}></Route>
+        <Route path="/login" element={<AdminLogin />}></Route>
+        <Route path="/RSVP_List" element={<Guests />}></Route>
       </Route>
     )
   );

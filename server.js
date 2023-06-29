@@ -17,7 +17,7 @@ const middlewares = jsonServer.defaults({
 
 // server.options("*", cors());
 
-const port = process.env.PORT || 5001;
+const port = process.env.SERVER_PORT || 5001;
 server.use(middlewares);
 server.use(
   jsonServer.rewriter({

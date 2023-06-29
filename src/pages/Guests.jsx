@@ -34,7 +34,7 @@ const Guests = () => {
     onSuccess: (data) => {
       setAdmin(data);
       localStorage.removeItem("admin-token");
-      navigate("/admin/login");
+      navigate("/login");
     },
   });
 
@@ -50,7 +50,7 @@ const Guests = () => {
       if (localStorage.getItem("admin-token") === "467HtKQRHsXVdSqdMJ") {
         setAdmin(data);
       } else {
-        navigate("/admin/login");
+        navigate("/login");
       }
     },
   });

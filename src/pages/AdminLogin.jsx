@@ -24,7 +24,7 @@ const AdminLogin = () => {
     {
       onSuccess: (data) => {
         if (data.logged_in) {
-          navigate("/admin/guests");
+          navigate("/RSVP_List");
         } else {
           setAdmin(data);
         }
@@ -52,7 +52,7 @@ const AdminLogin = () => {
     ) {
       localStorage.setItem("admin-token", "467HtKQRHsXVdSqdMJ");
       login();
-      navigate("/admin/guests");
+      navigate("/RSVP_List");
     } else {
       setErrors(true);
       setCredentials({ username: "", password: "" });
