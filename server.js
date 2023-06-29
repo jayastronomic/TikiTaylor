@@ -4,8 +4,20 @@ const router = jsonServer.router("./db.json");
 const middlewares = jsonServer.defaults({
   static: "./build",
 });
+const cors = require("cors");
 
-const port = process.env.PORT || 5000;
+server.use(
+  cors({
+    origin: true,
+    credentials: true,
+    preflightContinue: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  })
+);
+
+server.options("*", cors());
+
+const port = process.env.PORT || 5001;
 
 server.use(middlewares);
 server.use(

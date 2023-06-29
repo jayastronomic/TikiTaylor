@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
 import { useMutation } from "react-query";
@@ -19,7 +19,12 @@ const Reservation = () => {
   });
 
   const addGuest = async (data) => {
-    const guest = { ...data };
+    let guest;
+    if (data.plusOne.firstName === "") {
+      guest = { ...data, plusOne: null };
+    } else {
+      guest = { ...data };
+    }
     const payload = {
       method: "POST",
       headers: {
@@ -27,12 +32,12 @@ const Reservation = () => {
       },
       body: JSON.stringify(guest),
     };
-    const user = await fetch("http://localhost:3001/guests", payload);
+    const user = await fetch("http://localhost:5001/guests", payload);
     return await user.json();
   };
 
   const mutation = useMutation(addGuest, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       setVisible(true);
     },
   });
@@ -132,7 +137,6 @@ const Reservation = () => {
             />
             <label>Plus one</label>
           </div>
-
           {plusOne && (
             <motion.div
               animate={{ height: "auto" }}
@@ -157,7 +161,6 @@ const Reservation = () => {
               />
             </motion.div>
           )}
-
           <motion.button
             disabled={validFields() ? false : true}
             whileHover={
@@ -177,7 +180,15 @@ const Reservation = () => {
             type="submit"
           >
             Submit
-          </motion.button>
+          </motion.button>{" "}
+          <div>
+            <Link
+              to="/admin/login"
+              className="text-xs text-blue-300 hover:underline"
+            >
+              Admin Login
+            </Link>
+          </div>
         </form>
       </motion.div>
       {visible && <Modal />}

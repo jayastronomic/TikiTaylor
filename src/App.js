@@ -8,6 +8,8 @@ import {
 
 import Home from "./components/Home";
 import Reservation from "./pages/Reservation";
+import AdminLogin from "./pages/AdminLogin";
+import Guests from "./pages/Guests";
 
 function App() {
   const router = createBrowserRouter(
@@ -15,6 +17,8 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Home />}></Route>
         <Route path="/reservation" element={<Reservation />}></Route>
+        <Route path="/admin/login" element={<AdminLogin />}></Route>
+        <Route path="/admin/guests" element={<Guests />}></Route>
       </Route>
     )
   );

@@ -26,10 +26,6 @@ const Interface = () => {
         >
           RSVP
         </Link>
-        <button className="bg-[rgb(236,92,12)] w-24 border p-2 rounded-xl italic font-semibold hover:bg-[rgba(236,92,12,0.8)]">
-          <span>Wish</span>
-          <span>List</span>
-        </button>
       </div>
       <Info infoActive={infoActive} hideInfo={hideInfo} />
     </div>

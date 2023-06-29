@@ -1,3 +1,11 @@
 {
-  "guests": []
+  "guests": [],
+  "admin": [
+    {
+      "id": 1,
+      "username": "Taylor.admin",
+      "password": "19LXZgTH",
+      "logged_in": false
+    }
+  ]
 }
