@@ -17,7 +17,7 @@ const middlewares = jsonServer.defaults({
 
 // server.options("*", cors());
 
-const port = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8000;
 server.use(middlewares);
 server.use(
   jsonServer.rewriter({
@@ -26,6 +26,6 @@ server.use(
 );
 
 server.use(router),
-  server.listen(port, () => {
-    console.log(`Server is running on ${port}`);
+  server.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`);
   });

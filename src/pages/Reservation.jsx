@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
 import { useMutation } from "react-query";
 import Modal from "../components/Modal";
+import { HOST } from "../constants/host";
 
 const Reservation = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Reservation = () => {
       },
       body: JSON.stringify(guest),
     };
-    const user = await fetch("http://localhost:5001/guests", payload);
+    const user = await fetch(`${HOST}/guests`, payload);
     return await user.json();
   };
 

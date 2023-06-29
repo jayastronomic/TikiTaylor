@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const [errors, setErrors] = useState(false);
 
   const getLoginStatus = async () => {
-    const data = await fetch("http://localhost:5001/admin/1");
+    const data = await fetch(`${HOST}/admin/1`);
     return await data.json();
   };
 
@@ -40,7 +40,7 @@ const AdminLogin = () => {
       },
       body: JSON.stringify({ ...credentials, logged_in: true }),
     };
-    const user = await fetch("http://localhost:5001/admin/1", payload);
+    const user = await fetch(`${HOST}/admin/1`, payload);
     return await user.json();
   };
 

@@ -3,17 +3,18 @@ import { useQuery, useMutation } from "react-query";
 import GuestsContainer from "../containers/GuestsContainer";
 import * as FaIcon from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { HOST } from "../constants/host";
 
 const Guests = () => {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState({});
   const getGuests = async () => {
-    const data = await fetch("http://localhost:5001/guests");
+    const data = await fetch(`${HOST}/guests`);
     return await data.json();
   };
 
   const getAdmin = async () => {
-    const data = await fetch("http://localhost:5001/admin/1");
+    const data = await fetch(`${HOST}/admin/1`);
     return await data.json();
   };
 
@@ -26,7 +27,7 @@ const Guests = () => {
       },
       body: JSON.stringify(adminData),
     };
-    const data = await fetch("http://localhost:5001/admin/1", payload);
+    const data = await fetch(`${HOST}/admin/1`, payload);
     return await data.json();
   };
 
