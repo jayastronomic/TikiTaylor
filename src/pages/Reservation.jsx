@@ -182,11 +182,6 @@ const Reservation = () => {
           >
             Submit
           </motion.button>{" "}
-          <div>
-            <Link to="/login" className="text-xs text-blue-500 hover:underline">
-              Admin Login
-            </Link>
-          </div>
         </form>
       </motion.div>
       {visible && <Modal />}
