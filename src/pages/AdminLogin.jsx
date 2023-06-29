@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
 import { useQuery } from "react-query";
+import { HOST } from "../constants/host";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -18,19 +19,15 @@ const AdminLogin = () => {
     return await data.json();
   };
 
-  const { isLoading, isError, data, error } = useQuery(
-    "admin",
-    getLoginStatus,
-    {
-      onSuccess: (data) => {
-        if (data.logged_in) {
-          navigate("/RSVP_List");
-        } else {
-          setAdmin(data);
-        }
-      },
-    }
-  );
+  useQuery("admin", getLoginStatus, {
+    onSuccess: (data) => {
+      if (data.logged_in) {
+        navigate("/RSVP_List");
+      } else {
+        setAdmin(data);
+      }
+    },
+  });
 
   const login = async () => {
     const payload = {
