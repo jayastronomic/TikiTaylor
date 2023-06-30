@@ -4,16 +4,20 @@ import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
 import { useMutation } from "react-query";
 import Modal from "../components/Modal";
-import { HOST } from "../constants/host";
+
+const api =
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_DEVELOPMENT_SERVER
+    : process.env.REACT_APP_PRODUCTION_SERVER;
 
 const Reservation = () => {
   const navigate = useNavigate();
-  const [plusOne, setPlusOne] = useState(false);
+  const [friend, setPlusOne] = useState(false);
   const [visible, setVisible] = useState(false);
   const [guest, setGuest] = useState({
     firstName: "",
     lastName: "",
-    plusOne: {
+    friend: {
       firstName: "",
       lastName: "",
     },
@@ -21,25 +25,36 @@ const Reservation = () => {
 
   const addGuest = async (data) => {
     let guest;
-    if (data.plusOne.firstName === "") {
-      guest = { ...data, plusOne: null };
+    if (data.friend.firstName === "") {
+      guest = { first_name: data.firstName, last_name: data.lastName };
     } else {
-      guest = { ...data };
+      guest = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        friend: {
+          first_name: data.friend.firstName,
+          last_name: data.friend.lastName,
+        },
+      };
     }
     const payload = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(guest),
+      body: JSON.stringify({ guest: { ...guest } }),
     };
-    const user = await fetch(`${HOST}/guests`, payload);
+    console.log(payload);
+    const user = await fetch(`${api}/guests`, payload);
     return await user.json();
   };
 
   const mutation = useMutation(addGuest, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       setVisible(true);
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     },
   });
 
@@ -53,8 +68,8 @@ const Reservation = () => {
     if (name === "plusOneFirstName") {
       setGuest({
         ...guest,
-        plusOne: {
-          ...guest.plusOne,
+        friend: {
+          ...guest.friend,
           firstName: value,
         },
       });
@@ -63,8 +78,8 @@ const Reservation = () => {
     if (name === "plusOneLastName") {
       setGuest({
         ...guest,
-        plusOne: {
-          ...guest.plusOne,
+        friend: {
+          ...guest.friend,
           lastName: value,
         },
       });
@@ -75,12 +90,12 @@ const Reservation = () => {
 
   const validFields = () => {
     return (
-      (guest.firstName.length >= 1 && guest.lastName.length >= 1 && !plusOne) ||
+      (guest.firstName.length >= 1 && guest.lastName.length >= 1 && !friend) ||
       (guest.firstName.length >= 1 &&
         guest.lastName.length >= 1 &&
-        guest.plusOne.firstName.length >= 1 &&
-        guest.plusOne.lastName.length >= 1 &&
-        plusOne)
+        guest.friend.firstName.length >= 1 &&
+        guest.friend.lastName.length >= 1 &&
+        friend)
     );
   };
 
@@ -134,11 +149,11 @@ const Reservation = () => {
             <input
               className="cursor-pointer"
               type="checkbox"
-              onClick={() => setPlusOne(!plusOne)}
+              onClick={() => setPlusOne(!friend)}
             />
             <label>Plus one</label>
           </div>
-          {plusOne && (
+          {friend && (
             <motion.div
               animate={{ height: "auto" }}
               initial={{ height: 0 }}
@@ -149,14 +164,14 @@ const Reservation = () => {
               <input
                 className="border p-1 rounded focus:outline-none focus:ring-2"
                 placeholder="First"
-                value={guest.plusOne.firstName}
+                value={guest.friend.firstName}
                 onChange={handleChange}
                 name={"plusOneFirstName"}
               />
               <input
                 className="border p-1 rounded focus:outline-none focus:ring-2"
                 placeholder="Last"
-                value={guest.plusOne.lastName}
+                value={guest.friend.lastName}
                 onChange={handleChange}
                 name={"plusOneLastName"}
               />
@@ -182,6 +197,11 @@ const Reservation = () => {
           >
             Submit
           </motion.button>{" "}
+          <div>
+            <Link to="/login" className="text-xs hover:underline text-blue-500">
+              Admin Login
+            </Link>
+          </div>
         </form>
       </motion.div>
       {visible && <Modal />}

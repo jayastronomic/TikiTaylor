@@ -2,58 +2,61 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
-import { useQuery } from "react-query";
-import { HOST } from "../constants/host";
+import { useQuery, useMutation } from "react-query";
+const api =
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_DEVELOPMENT_SERVER
+    : process.env.REACT_APP_PRODUCTION_SERVER;
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState({ username: "", password: "" });
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState("");
 
   const getLoginStatus = async () => {
-    const data = await fetch(`${HOST}/admin/1`);
+    const data = await fetch(`${api}/logged_in`, { credentials: "include" });
     return await data.json();
   };
 
   useQuery("admin", getLoginStatus, {
     onSuccess: (data) => {
       if (data.logged_in) {
-        navigate("/RSVP_List");
+        navigate("/list");
+      }
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const login = async (data) => {
+    const payload = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ admin: { ...data } }),
+      credentials: "include",
+    };
+    const admin = await fetch(`${api}/login`, payload);
+    return await admin.json();
+  };
+
+  const mutation = useMutation(login, {
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.logged_in) {
+        navigate("/list");
       } else {
-        setAdmin(data);
+        setErrors(data.error);
       }
     },
   });
 
-  const login = async () => {
-    const payload = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...credentials, logged_in: true }),
-    };
-    const user = await fetch(`${HOST}/admin/1`, payload);
-    return await user.json();
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      credentials.username === admin.username &&
-      credentials.password === admin.password
-    ) {
-      localStorage.setItem("admin-token", "467HtKQRHsXVdSqdMJ");
-      login();
-      navigate("/RSVP_List");
-    } else {
-      setErrors(true);
-      setCredentials({ username: "", password: "" });
-    }
+    mutation.mutate(credentials);
   };
 
   const handleChange = (e) => {
@@ -125,7 +128,7 @@ const AdminLogin = () => {
               transition={{ duration: 0.3 }}
               className="text-red-500 text-sm"
             >
-              Invalid username or password
+              {errors}
             </motion.div>
           )}
           <motion.button

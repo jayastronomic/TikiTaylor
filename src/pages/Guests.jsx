@@ -3,57 +3,54 @@ import { useQuery, useMutation } from "react-query";
 import GuestsContainer from "../containers/GuestsContainer";
 import * as FaIcon from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { HOST } from "../constants/host";
+
+const api =
+  process.env.NODE_ENV === "development"
+    ? process.env.REACT_APP_DEVELOPMENT_SERVER
+    : process.env.REACT_APP_PRODUCTION_SERVER;
 
 const Guests = () => {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState({});
+
   const getGuests = async () => {
-    const data = await fetch(`${HOST}/guests`);
+    const data = await fetch(`${api}/guests`);
     return await data.json();
   };
 
   const getAdmin = async () => {
-    const data = await fetch(`${HOST}/admin/1`);
-    return await data.json();
+    const admin = await fetch(`${api}/logged_in`, { credentials: true });
+    return await admin.json();
   };
 
-  const logOut = async (state) => {
-    const adminData = { ...state, logged_in: false };
-    const payload = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(adminData),
-    };
-    const data = await fetch(`${HOST}/admin/1`, payload);
+  const logOut = async () => {
+    const data = await fetch(`${api}/logout`, {
+      method: "DELETE",
+      credentials: "include",
+    });
     return await data.json();
   };
 
   const mutation = useMutation(logOut, {
     onSuccess: (data) => {
-      setAdmin(data);
-      localStorage.removeItem("admin-token");
-      navigate("/login");
+      if (!data.logged_in) {
+        setAdmin(data);
+        navigate("/");
+      }
     },
   });
 
-  const {
-    data: guests,
-    isLoading,
-    isError,
-    isFetched,
-  } = useQuery("guests", getGuests);
+  const { data: guests, isLoading, isFetched } = useQuery("guests", getGuests);
 
   useQuery("admin", getAdmin, {
     onSuccess: (data) => {
-      if (localStorage.getItem("admin-token") === "467HtKQRHsXVdSqdMJ") {
+      if (data.logged_in) {
         setAdmin(data);
       } else {
         navigate("/login");
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   return (
@@ -71,13 +68,6 @@ const Guests = () => {
       </div>
       <div className="relative flex flex-col bg-white h-3/4 w-full rounded-2xl shadow-lg p-4 max-w-xl">
         <h1 className="text-3xl text-center p-4">RSVP List</h1>
-        <div className="right-2 absolute flex flex-col">
-          <p>Total Guests: {guests?.length || 0}</p>
-          <p>
-            Total Plus Ones:{" "}
-            {guests?.filter((guest) => guest.plusOne !== null).length || 0}
-          </p>
-        </div>
         {isLoading && (
           <div className="flex justify-center">
             <h2 className="mt-24">...Loading</h2>
