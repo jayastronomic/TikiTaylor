@@ -26,6 +26,12 @@ const Interface = () => {
         >
           RSVP
         </Link>
+        <Link
+          to="/wishlist"
+          className="bg-[rgba(237,91,12)] w-fit border p-2 rounded-xl italic font-semibold hover:bg-[rgba(237,91,12,0.8)]"
+        >
+          WishList
+        </Link>
       </div>
       <Info infoActive={infoActive} hideInfo={hideInfo} />
     </div>

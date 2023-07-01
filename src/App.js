@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Reservation from "./pages/Reservation";
 import AdminLogin from "./pages/AdminLogin";
 import Guests from "./pages/Guests";
+import WishList from "./pages/WishList";
 
 function App() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ function App() {
         <Route path="/reservation" element={<Reservation />}></Route>
         <Route path="/login" element={<AdminLogin />}></Route>
         <Route path="/list" element={<Guests />}></Route>
+        <Route path="/wishlist" element={<WishList />} />
       </Route>
     )
   );
