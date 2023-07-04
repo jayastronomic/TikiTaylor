@@ -11,16 +11,10 @@ const api =
 
 const Guests = () => {
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState({});
 
   const getGuests = async () => {
     const data = await fetch(`${api}/guests`);
     return await data.json();
-  };
-
-  const getAdmin = async () => {
-    const admin = await fetch(`${api}/logged_in`, { credentials: true });
-    return await admin.json();
   };
 
   const logOut = async () => {
@@ -34,24 +28,12 @@ const Guests = () => {
   const mutation = useMutation(logOut, {
     onSuccess: (data) => {
       if (!data.logged_in) {
-        setAdmin(data);
         navigate("/");
       }
     },
   });
 
   const { data: guests, isLoading, isFetched } = useQuery("guests", getGuests);
-
-  useQuery("admin", getAdmin, {
-    onSuccess: (data) => {
-      if (data.logged_in) {
-        setAdmin(data);
-      } else {
-        navigate("/login");
-      }
-    },
-    refetchOnWindowFocus: false,
-  });
 
   return (
     <div className="flex flex-col h-screen w-screen items-center bg-gray-100 p-8">
@@ -61,7 +43,7 @@ const Guests = () => {
         </Link>
         <button
           className="text-white font-semi-bold bg-blue-500 text-xs rounded p-2"
-          onClick={() => mutation.mutate(admin)}
+          onClick={() => mutation.mutate()}
         >
           Log out
         </button>

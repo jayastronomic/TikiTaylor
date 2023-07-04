@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import * as FaIcon from "react-icons/fa";
 import { useQuery, useMutation } from "react-query";
+import { TailSpin } from "react-loader-spinner";
 const api =
   process.env.NODE_ENV === "development"
     ? process.env.REACT_APP_DEVELOPMENT_SERVER
@@ -43,7 +44,7 @@ const AdminLogin = () => {
     return await admin.json();
   };
 
-  const mutation = useMutation(login, {
+  const { mutate, isLoading } = useMutation(login, {
     onSuccess: (data) => {
       console.log(data);
       if (data.logged_in) {
@@ -56,7 +57,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate(credentials);
+    mutate(credentials);
   };
 
   const handleChange = (e) => {
@@ -104,55 +105,64 @@ const AdminLogin = () => {
             <span className="text-[#e68ab9]">I</span>
             <span className="text-[#ec5c0c]">N</span>
           </p>
-          <div className="flex flex-col space-y-2">
-            <input
-              className="border p-1 rounded focus:outline-none focus:ring-2"
-              placeholder="username"
-              value={credentials.username}
-              name="username"
-              onChange={handleChange}
-            />
-            <input
-              className="border p-1 rounded focus:outline-none focus:ring-2"
-              placeholder="password"
-              value={credentials.password}
-              name="password"
-              onChange={handleChange}
-              type="password"
-            />
-          </div>
-          {errors && (
-            <motion.div
-              initial={{ height: 0 }}
-              animate={{ height: "auto" }}
-              transition={{ duration: 0.3 }}
-              className="text-red-500 text-sm"
-            >
-              {errors}
-            </motion.div>
-          )}
-          <motion.button
-            disabled={validFields() ? false : true}
-            whileHover={
-              validFields()
-                ? {
-                    scale: 1.05,
-                    transition: { duration: 0.2 },
-                  }
-                : {}
-            }
-            whileTap={{ scale: 1 }}
-            className={
-              validFields()
-                ? "text-white bg-blue-400 rounded p-2 self-start w-full transition duration-200"
-                : "text-white bg-gray-300 rounded p-2 self-start w-full cursor-not-allowed transition duration-200"
-            }
-            type="submit"
-          >
-            Submit
-          </motion.button>{" "}
+          {
+            <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-2">
+                <input
+                  className="border p-1 rounded focus:outline-none focus:ring-2"
+                  placeholder="username"
+                  value={credentials.username}
+                  name="username"
+                  onChange={handleChange}
+                />
+                <input
+                  className="border p-1 rounded focus:outline-none focus:ring-2"
+                  placeholder="password"
+                  value={credentials.password}
+                  name="password"
+                  onChange={handleChange}
+                  type="password"
+                />
+              </div>
+              {errors && (
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: "auto" }}
+                  transition={{ duration: 0.3 }}
+                  className="text-red-500 text-sm"
+                >
+                  {errors}
+                </motion.div>
+              )}
+              <motion.button
+                disabled={validFields() ? false : true}
+                whileHover={
+                  validFields()
+                    ? {
+                        scale: 1.05,
+                        transition: { duration: 0.2 },
+                      }
+                    : {}
+                }
+                whileTap={{ scale: 1 }}
+                className={
+                  validFields()
+                    ? "text-white bg-blue-400 rounded p-2 self-start w-full transition duration-200"
+                    : "text-white bg-gray-300 rounded p-2 self-start w-full cursor-not-allowed transition duration-200"
+                }
+                type="submit"
+              >
+                Submit
+              </motion.button>
+            </div>
+          }
         </form>
       </motion.div>
+      {isLoading && (
+        <div className="fixed flex flex-col justify-center items-center bg-white w-screen h-screen bg">
+          <TailSpin color="gray" />
+        </div>
+      )}
     </div>
   );
 };

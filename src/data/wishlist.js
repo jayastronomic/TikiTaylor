@@ -19,8 +19,38 @@ export const wishlist = [
   },
   {
     name: "Tiffany Earrings",
-    price: "$250.00",
+    price: "250.00",
     inStock: "In Stock",
     link: "https://www.tiffany.com/jewelry/earrings/return-to-tiffany-heart-tag-stud-earrings-23900564/",
+  },
+  {
+    name: "Marc Jacos - Daisy",
+    price: "128.00",
+    inStock: "In Stock",
+    link: "https://www.sephora.com/product/daisy-P191858",
+  },
+  {
+    name: "Tiffany and Co - Tiffany & Love",
+    price: "149.00",
+    inStock: "In Stock",
+    link: "https://www.tiffany.com/fragrance/tiffany-fragrance/tiffany-love-eau-de-parfum-for-her-68112257/",
+  },
+  {
+    name: "Burberry - Her",
+    price: "Prices Vary",
+    inStock: "In Stock",
+    link: "https://uk.burberry.com/womens-fragrances/#/her/",
+  },
+  {
+    name: "Tequila (Patron, Don Julio, Teremana)",
+    price: "Prices Vary",
+    inStock: "In Stock",
+    link: "https://www.binnys.com/",
+  },
+  {
+    name: "Gift Cards (Chic-Fil-A, Sephora, Footlocker)",
+    price: "Prices Vary",
+    inStock: "In Stock",
+    link: "https://www.giftcards.com/virtual-gift-cards",
   },
 ];

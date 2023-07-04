@@ -44,17 +44,13 @@ const Reservation = () => {
       },
       body: JSON.stringify({ guest: { ...guest } }),
     };
-    console.log(payload);
     const user = await fetch(`${api}/guests`, payload);
     return await user.json();
   };
 
   const mutation = useMutation(addGuest, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       setVisible(true);
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
     },
   });
 
